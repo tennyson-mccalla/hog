@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+
+from os import popen
+from sys import argv
+
+thing = argv[1]
+
+with popen(f"top -n 1 -b | grep {thing} | cut -c53-58") as f:
+    print(sum(float(num.strip()) for num in f))
+    # print([float(num.strip()) for num in f])
