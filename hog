@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 
 from os import popen
-from sys import argv
+from sys import argv, version_info
 
 thing = argv[1]
 
-with popen(f"top -n 1 -b | grep {thing} | cut -c53-58") as f:
-    print(sum(float(num.strip()) for num in f))
-    # print([float(num.strip()) for num in f])
+if version_info[0] > 2 and version_info[1] >= 6:
+    with popen(f"top -n 1 -b | grep {thing} | cut -c53-58") as f:
+        print(sum(float(num.strip()) for num in f))
+else:
+    with popen("top -n 1 -b | grep {} | cut -c53-58".format(thing)) as f:
+        print(sum(float(num.strip()) for num in f))
