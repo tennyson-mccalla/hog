@@ -7,7 +7,10 @@ thing = argv[1]
 
 if version_info[0] > 2 and version_info[1] >= 6:
     with popen(f"top -n 1 -b | grep {thing} | cut -c53-58") as f:
-        print(sum(float(num.strip()) for num in f))
+        Sum = sum(float(num.strip()) for num in f)
+        print(f'{thing} is taking up {round(Sum, 2)}% of memory right now')
 else:
     with popen("top -n 1 -b | grep {} | cut -c53-58".format(thing)) as f:
-        print(sum(float(num.strip()) for num in f))
+        Sum = sum(float(num.strip()) for num in f)
+        print('{} is taking up {}% of memory right now'.format(
+            thing, round(Sum, 2)))
