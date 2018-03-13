@@ -15,3 +15,5 @@ I originally made this to track the percentage of memory that Chrome took up on 
 ## to do
 - [ ] Solve Python2 and Python3 issues.
 - [x] Make a nicer output.
+- [ ] Comment code.
+
