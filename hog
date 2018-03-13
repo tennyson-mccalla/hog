@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
 
-from os import popen
-from sys import argv, version_info
+from os import popen  # for interaction with the shell
+from sys import argv  # to take command line arguments
 
-thing = argv[1]
+thing = argv[1]  # memory hog to search for
 
-if version_info[0] > 2 and version_info[1] >= 6:
-    with popen(f"top -n 1 -b | grep {thing} | cut -c53-58") as f:
-        Sum = sum(float(num.strip()) for num in f)
-        print(f'{thing} is taking up {round(Sum, 2)}% of memory right now')
-else:
-    with popen("top -n 1 -b | grep {} | cut -c53-58".format(thing)) as f:
-        Sum = sum(float(num.strip()) for num in f)
-        print('{} is taking up {}% of memory right now'.format(
-            thing, round(Sum, 2)))
+# uses context manager on "popen" to pipe script that executes "top" once in
+# batch mode, pipes results to "grep" in order to search for user entered
+# "thing", those results are then piped to "cut" to get characters 53 to 58 on
+# each line. Object saved as "f".
+
+# variable "percent" is the sum of all of the memory percents found in "f"
+# string representations of numbers are stripped of whitespace and converted to
+# floats, which can be summed.
+
+# user friendly message is printed to stdout
+
+with popen(f"top -n 1 -b | grep {thing} | cut -c53-58") as f:
+    percent = sum(float(num.strip()) for num in f)
+    print(f'{thing} is taking up {round(percent, 2)}% of memory right now')

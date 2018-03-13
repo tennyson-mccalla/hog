@@ -13,7 +13,6 @@ Use Python 3.6+ for best results.
 I originally made this to track the percentage of memory that Chrome took up on this slow, resource constrained, Lenovo I'm using. I realized that it could be generalized and so altered it then uploaded it here.
 
 ## to do
-- [ ] Solve Python2 and Python3 issues.
+- [x] Solve Python2 and Python3 issues.
 - [x] Make a nicer output.
-- [ ] Comment code.
-
+- [x] Comment code.
